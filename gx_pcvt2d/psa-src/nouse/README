@@ -1,0 +1,102 @@
+                        psa - Point Set Analysis
+
+ A tool for the analysis of two-dimensional point sets with applications in
+ graphics.
+
+                                 Overview
+
+  psa is a command line tool that takes two-dimensional point sets as input
+and analyzes these point sets with respect to their Fourier amplitude/power
+spectrum, radial power, anisotropy, L_{2}-norm star discrepancy, and two
+toroidal distance measures. The tool provides the ability to auto-generate
+nicely formatted 'paper ready' plots based on a set of carefully chosen for-
+matting parameters. For a detailed background on the employed measures, con-
+sult our technical report or the upcoming paper:
+
+ Thomas Schl\"{o}mer, Oliver Deussen:
+ Accurate Spectral Analysis of Two-Dimensional Point Sets.
+ Journal of Graphics, GPU, and Game Tools, to appear.
+
+ Thomas Schl\"{o}mer, Oliver Deussen:
+ Towards a Standardized Spectral Analysis of Point Sets with Applications
+ in Graphics.
+ Technical Report, University of Konstanz, May 2010.
+
+The latest version of psa can always be found at http://psa.googlecode.com.
+Any suggestions regarding the concepts or the implementation of psa are very
+welcomed. Feel free to contact us via: thomas.schloemer@uni-konstanz.de.
+
+                                Compilation
+
+  psa is written in C++ and should compile by a simple 'make' with any modern
+C++ compiler after you set the correct INC and LIB directories in the accom-
+panying Makefile. Dependencies are fftw3 (http://www.fftw.org) for an
+optional fast Fourier transform and cairo (http://www.cairographics.org) for
+plot drawing, PDF and PNG output. Under Linux and Mac OS X both libraries can
+be obtained via apt-get, MacPorts, or the like. Under Windows, cairo can be
+obtained as part of GTK+ (http://www.gtk.org/) while fftw can be downloaded
+as a precompiled library directly from the fftw website. psa also makes use
+of OpenMP.
+
+                                   Usage
+
+  psa supports two 'modes'. The first mode takes a single point set file as
+an input and analyzes it with respect to the aforementioned characteristics.
+In this mode, psa renders the sets' Fourier amplitude spectrum. The second
+mode takes a whole directory of point set files as input. In this case, psa
+renders the power spectrum of all point sets and computes mean, standard
+deviation, minimum and maximum of the non-spectral measurements.
+Type
+  ./psa -h
+for a short list of available parameters.
+
+                                File Formats
+
+  Point set files are currently supported in two flavors: as raw single-
+precision floating point data with the extension '.rps' ('raw point set'). Or
+as a plain text file with the extension '.txt' using the simple format
+
+ numPoints
+ point[0].x point[0].y
+ point[1].x point[1].y
+ point[2].x point[2].y
+ ...
+
+  The functions SaveRPS() and SaveTXT() in fileio.h/.cpp produce such files
+and may be copy+pasted into your own project. You may also obtain example
+files from http://psa.googlecode.com.
+
+
+                       License and Acknowledgements
+
+  psa is free software and published under the GNU GPL. For further
+information see the file COPYING. This software has been funded by DFG,
+German Research Foundation. Thanks to Daniel Heck for the system-independent
+directory iterators.
+
+Copyright (C) 2011 Thomas Schl\"{o}mer (thomas.schloemer@uni-konstanz.de)
+
+
+                              Version History
+v0.2.2
+- Added average mindist measure
+- Removed non-toroidal distance measure
+- Normalized radius is now called normalized mindist
+- Changed default plot colors to black
+- Improved code readability
+
+v0.2.1
+- Bug fixes with respect to cairo version >1.10.0
+- Fixed some MS VS compilation issues
+
+v0.2
+- Integrated an optional DFT using the fftw-library
+- Non-spectral measurements are now also rendered into summary files
+- Added non-toroidal minimum distance computation
+- Support for more arbitrarily many point sets in a single directory
+- Bug fixes
+
+v0.1
+- Initial release
+
+
